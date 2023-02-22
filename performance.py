@@ -2,6 +2,7 @@ import numpy as np
 import numba
 import matplotlib.pyplot as plt
 import time
+import flopFunc
 
 
 def make_data(N):
@@ -30,7 +31,8 @@ def bandWidthCompute():
         sMin = 1
         sMax = 8
         N = 25
-        sizes = np.logspace(sMin, sMax, N, dtype=int)
+        base = 11
+        sizes = np.logspace(sMin, sMax, N, base=base, dtype=int)
         bandWidth = np.zeros_like(sizes)
         print(sizes)
         y, x, a, b = make_data(10)
@@ -43,7 +45,7 @@ def bandWidthCompute():
             axpb(y, x, a, b)
             runTime1 = time.perf_counter() - initialTime
             runTimeTemp.append(runTime1)
-            delta = 2
+            delta = 0.2
             for i in range(7):
                 y, x, a, b = make_data(sizes[itr])
                 nLoop = 0
@@ -69,50 +71,12 @@ def bandWidthCompute():
     plt.loglog(sizes, bandWidth, marker='o')
     plt.loglog(cpu_L1, cpu_y, label='L1:32kB')
     plt.loglog(cpu_L2_s, cpu_y, label='L2:512kB')
-    plt.loglog(cpu_L2_l, cpu_y, label='L2:2MB')
-    plt.loglog(cpu_L3, cpu_y, label='L3:8MB')
+    plt.loglog(cpu_L2_l, cpu_y, label='L2:6MB')
+    plt.loglog(cpu_L3, cpu_y, label='L3:64MB')
     plt.legend(loc='best')
     plt.xlabel('size')
     plt.ylabel('Memory bandwidth (bytes/sec)')
     plt.savefig('bandwidth_vs_N.png')
-
-
-def flop2(y, x, a, b):
-    for i in range(y.shape[0]):
-        y[i] = a[i] + b[i] + x[i]
-
-
-def flop4(y, x, a, b):
-    for i in range(y.shape[0]):
-        y[i] = a[i] + b[i] + x[i]
-        y[i] = a[i] - b[i] - x[i]
-
-
-def flop8(y, x, a, b):
-    for i in range(y.shape[0]):
-        y[i] = a[i] + b[i] + x[i] + a[i] * b[i]
-        y[i] = a[i] - b[i] - x[i] * a[i] - b[i]
-
-
-def flop16(y, x, a, b):
-    for i in range(y.shape[0]):
-        y[i] = (a[i] + b[i])*x[i] + a[i]*(x[i] + a[i])*(b[i] - a[i]) + x[i]
-        y[i] = (a[i] - b[i])*x[i] - a[i]*(x[i] - a[i])*(b[i] + a[i]) - x[i]
-
-
-def flop24(y, x, a, b):
-    for i in range(y.shape[0]):
-        y[i] = (a[i] + b[i])*x[i] + a[i]*(x[i] + a[i])*(b[i] - a[i]) + x[i]
-        y[i] = (a[i] - b[i])*x[i] - a[i]*(x[i] - a[i])*(b[i] + a[i]) - x[i]
-        y[i] = (a[i] - b[i])*x[i] - a[i]*(x[i] - a[i])*(b[i] + a[i]) - x[i]
-
-
-def flop32(y, x, a, b):
-    for i in range(y.shape[0]):
-        y[i] = (a[i] + b[i])*x[i] + a[i]*(x[i] + a[i])*(b[i] - a[i]) + x[i]
-        y[i] = (a[i] - b[i])*x[i] - a[i]*(x[i] - a[i])*(b[i] + a[i]) - x[i]
-        y[i] = (a[i] - b[i])*x[i] - a[i]*(x[i] - a[i])*(b[i] + a[i]) - x[i]
-        y[i] = (a[i] + b[i])*x[i] + a[i]*(x[i] - a[i])+(b[i] * a[i]) + x[i]
 
 
 def flopsCompute():
@@ -125,33 +89,44 @@ def flopsCompute():
         sMin = 1
         sMax = 8
         N = 25
-        sizes = np.logspace(sMin, sMax, N, dtype=int)
-        flops = np.zeros((sizes.shape[0], 6))
+        base = 11
+        sizes = np.logspace(sMin, sMax, N, base=base, dtype=int)
+        flops = np.zeros((sizes.shape[0], 7))
         print(sizes)
-        y, x, a, b = make_data(10)
-        for j in range(6):
+        for j in range(7):
             print('\n\n-------------------- flops vs N ('+str(j)+')'
                   '--------------------\n\n')
             for itr in range(sizes.shape[0]):
-                y, x, a, b = make_data(sizes[itr])
+                y_test, x_test, a_test, b_test = make_data(5)
                 if j == 0:
-                    func = flop2
+                    func = flopFunc.flop2
+                    func(y_test, x_test, a_test, b_test)
                     totFlops = 2*sizes[itr]
                 elif j == 1:
-                    func = flop4
+                    func = flopFunc.flop4
+                    func(y_test, x_test, a_test, b_test)
                     totFlops = 4*sizes[itr]
                 elif j == 2:
-                    func = flop8
+                    func = flopFunc.flop8
+                    func(y_test, x_test, a_test, b_test)
                     totFlops = 8*sizes[itr]
                 elif j == 3:
-                    func = flop16
+                    func = flopFunc.flop16
+                    func(y_test, x_test, a_test, b_test)
                     totFlops = 16*sizes[itr]
                 elif j == 4:
-                    func = flop24
+                    func = flopFunc.flop24
+                    func(y_test, x_test, a_test, b_test)
                     totFlops = 24*sizes[itr]
-                else:
-                    func = flop32
+                elif j == 5:
+                    func = flopFunc.flop32
+                    func(y_test, x_test, a_test, b_test)
                     totFlops = 32*sizes[itr]
+                else:
+                    func = flopFunc.flop64
+                    func(y_test, x_test, a_test, b_test)
+                    totFlops = 64*sizes[itr]
+                y, x, a, b = make_data(sizes[itr])
                 runTimeTemp = []
                 initialTime = time.perf_counter()
                 func(y, x, a, b)
@@ -163,7 +138,7 @@ def flopsCompute():
                     nLoop = 0
                     initialTime = time.perf_counter()
                     while time.perf_counter() - initialTime < delta:
-                        axpb(y, x, a, b)
+                        func(y, x, a, b)
                         nLoop += 1
                     runTimeTemp.append(delta/nLoop)
 
@@ -172,9 +147,11 @@ def flopsCompute():
                 print(sizes[itr], ', ', runTime, ', ', nLoop)
         np.savez('flops_N.npz', flops=flops, sizes=sizes)
 
-    label = ['2 flop', '4 flop', '8 flop', '16 flop', '24 flop', '32 flop']
+    label = ['2 flop', '4 flop', '8 flop', '16 flop', '24 flop', '32 flop',
+             '64 flop']
+
     plt.figure(2)
-    for j in range(6):
+    for j in range(7):
         plt.loglog(sizes, flops[:, j], marker='o', label=label[j])
     plt.legend(loc='best')
     plt.xlabel('size')
