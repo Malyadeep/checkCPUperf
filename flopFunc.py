@@ -56,3 +56,7 @@ def flop64(y, x, a, b):
         y[i] = (a[i] + b[i])*x[i] + a[i]*(x[i] + a[i])*(b[i] - a[i]) + x[i]
         y[i] = (a[i] - b[i])*x[i] - a[i]*(x[i] - a[i])*(b[i] + a[i]) - x[i]
         y[i] = (a[i] + b[i])*x[i] + a[i]*(x[i] + a[i])*(b[i] - a[i]) + x[i]
+
+
+if __name__ == '__main__':
+    print('module containing functions to perform floating point operations')
