@@ -34,7 +34,7 @@ def main():
                                      args.base, args.force)
 
     plotFunc.plotBandWidth(bandWidthResult[0], bandWidthResult[1])
-    plotFunc.plotBandWidth(flopsResult[0], flopsResult[1])
+    plotFunc.plotFlops(flopsResult[0], flopsResult[1])
 
     print('Run completed --> run time = ' + "{:.4e}".format(time.perf_counter()
           - startTime) + '\n')

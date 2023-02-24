@@ -27,7 +27,7 @@ def flopsCompute(sMin, sMax, N, base, force):
             print('\n-------------------- flops vs N ('+str(j+1)+'/7)' +
                   '--------------------\n')
             for itr in range(sizes.shape[0]):
-                y_test, x_test, a_test, b_test = make_data(5)
+                y_test, x_test, a_test, b_test = make_data.make_data(5)
                 if j == 0:
                     func = flopFunc.flop2
                     func(y_test, x_test, a_test, b_test)
@@ -86,3 +86,4 @@ def flopsCompute(sMin, sMax, N, base, force):
           "{:.4f}".format(np.max(flops)/10**9) + '\n')
     print('\n##############################################################' +
           '#########\n')
+    return sizes, flops

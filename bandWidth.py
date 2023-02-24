@@ -64,3 +64,4 @@ def bandWidthCompute(sMin, sMax, N, base, force):
           "{:.4f}".format(np.max(bandWidth)/10**9) + ' GB/s \n')
     print('\n##############################################################' +
           '#########\n')
+    return sizes, bandWidth
