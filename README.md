@@ -38,6 +38,7 @@ The main script _performance.py_ which takes the following command line argument
 - _sMax_ -- denotes the maximum order of the array size. Default is 8.
 - _base_ -- specifies the base of the logarithm to use to generate the list of array sizes. Default is 10.
 - _n_ -- number of arrays to create <br>
+
 The code also takes following optional arguments 
 - _f_ -- forces the code to run the test again and overwrite previous results if present. By default the program will not run again if previous results are present.
 - _p_ -- Specifies whether to plot the data or not. Default is false. <br>
@@ -55,7 +56,19 @@ The code has 7 functions that do to 2, 4, 8, 16, 24, 32 and 64 floating point op
 A function to plot the data is provided which can be modified to generate various linestyles and formatting. In a later release a provision could be provided that the function reads the parameters from a file.<br>
 The plots also compare the peak memory bandwidth with the cache sizes of the CPU cores. The cache information can be provided in the file _cacheDetails.md_. (To find the cache details and distribution of memory, obtain a specification sheet of the CPU). __Note__ : _Make sure the largest array size exceeds the maximum cache size of the CPU to get maximum understanding from the plots_. <br>
 
+# Best practices
+- For best reults close all other applications that might be running before running the code.
+- Also it is recommended that if using laptop, it is connected to AC power source.
+- The machine should be set to peak performance mode for best results. In Windows and macOS, set the _performance_ mode instead of _efficiency_. In LINUX, set the _governor_ to performance.
+- To ensure the code is run on a specified CPU core, the _taskset_ command can be used in LINUX. For example :
+> taskset -c [cpu_core] python performance.py [arguments] 
 
+where [cpu_core] denotes the index of the CPU cores available. (Usually starts from 0)
+
+# Sample Results
+Some sample results with explanations are provided in _SampleResults/_
+
+Happy computing!!
 
 
 
