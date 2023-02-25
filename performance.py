@@ -26,7 +26,15 @@ def main():
                         'overwrite previous results')
     args = parser.parse_args()
     if not os.path.exists('output'):
+        print("\n'output/' not present : Creating 'output/'\n")
         os.makedirs('output')
+    else:
+        print("'output/' exists\n")
+    print('## Input parameters')
+    print('--> sMin = '+str(args.sMin))
+    print('--> sMax = '+str(args.sMax))
+    print('--> no.of arrays = '+str(args.no_of_arrays))
+    print('--> base = '+str(args.base))
     bandWidthResult = bandWidth.bandWidthCompute(args.sMin, args.sMax,
                                                  args.no_of_arrays,
                                                  args.base, args.force)
