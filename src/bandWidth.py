@@ -13,10 +13,11 @@ def axpb(y, x, a, b):
 
 def bandWidthCompute(sMin, sMax, N, base, force):
     totalInitialTime = time.perf_counter()
+    print('\n\nRunning bandwidth computation....')
     try:
-        data = np.load('output/bw_N.npz')
+        data = np.load('output/data/bw_N.npz')
         if force is False:
-            print('\nPrevious result found --> replotting the results\n')
+            print('\nPrevious result found --> output/data/bw_N.npz\n')
             sizes = data['sizes']
             bandWidth = data['bandWidth']
         else:
@@ -56,7 +57,7 @@ def bandWidthCompute(sMin, sMax, N, base, force):
                   '| array size = ', str(sizes[itr]).ljust(12),
                   '| run time = ', "{:.4e}".format(runTime),
                   '| no.of iterations = ', str(nLoop).ljust(8))
-        np.savez('output/bw_N.npz', bandWidth=bandWidth, sizes=sizes)
+        np.savez('output/data/bw_N.npz', bandWidth=bandWidth, sizes=sizes)
 
     totalRunTime = time.perf_counter() - totalInitialTime
     print('\nBandwidth computation completed --> run time = ' +

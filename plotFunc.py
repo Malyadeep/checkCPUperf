@@ -37,7 +37,7 @@ def plotBandWidth(sizes, bandWidth):
     plt.legend(loc='best')
     plt.xlabel('size')
     plt.ylabel('Memory bandwidth (bytes/sec)')
-    plt.savefig('output/bandwidth_vs_N.png')
+    plt.savefig('output/figures/bandwidth_vs_N.png')
     print('Finished plotting!\n')
 
 
@@ -52,7 +52,7 @@ def plotFlops(sizes, flops):
     plt.legend(loc='best')
     plt.xlabel('size')
     plt.ylabel('FLOPS')
-    plt.savefig('output/flops_vs_N.png')
+    plt.savefig('output/figures/flops_vs_N.png')
     print('Finished plotting!\n')
 
 

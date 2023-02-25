@@ -23,25 +23,38 @@ def main():
     parser.add_argument('-f', '--force', action='store_true', default=False,
                         help='force to run the test again and ' +
                         'overwrite previous results')
+    parser.add_argument('-p', '--plot', action='store_true', default=False,
+                        help='if selected plots the results')
     args = parser.parse_args()
     if not os.path.exists('output'):
         print("\n'output/' not present : Creating 'output/'\n")
         os.makedirs('output')
+        os.makedirs('output/data')
+        os.makedirs('output/figures')
     else:
         print("'output/' exists\n")
-    print('## Input parameters')
+        if not os.path.exists('output/data'):
+            os.makedirs('output/data')
+            if args.plot is True and not os.path.exists('output/figures'):
+                os.makedirs('output/figures')
+    print('################### Input parameters ###################')
     print('--> sMin = '+str(args.sMin))
     print('--> sMax = '+str(args.sMax))
     print('--> no.of arrays = '+str(args.no_of_arrays))
     print('--> base = '+str(args.base))
+    print('--> plot results = '+str(args.plot))
+    print('#########################################################')
     bandWidthResult = bandWidth.bandWidthCompute(args.sMin, args.sMax,
                                                  args.no_of_arrays,
                                                  args.base, args.force)
     flopsResult = flops.flopsCompute(args.sMin, args.sMax, args.no_of_arrays,
                                      args.base, args.force)
 
-    plotFunc.plotBandWidth(bandWidthResult[0], bandWidthResult[1])
-    plotFunc.plotFlops(flopsResult[0], flopsResult[1])
+    if args.plot is True:
+        plotFunc.plotBandWidth(bandWidthResult[0], bandWidthResult[1])
+        plotFunc.plotFlops(flopsResult[0], flopsResult[1])
+    else:
+        print('Plot option not selected --> Results not plotted')
 
     print('Run completed --> run time = ' + "{:.4e}".format(time.perf_counter()
           - startTime) + '\n')

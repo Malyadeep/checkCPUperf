@@ -6,10 +6,11 @@ from src import make_data, flopFunc
 
 def flopsCompute(sMin, sMax, N, base, force):
     totalInitialTime = time.perf_counter()
+    print('Running FLOPS computation....')
     try:
-        data = np.load('output/flops_N.npz')
+        data = np.load('output/data/flops_N.npz')
         if force is False:
-            print('\nPrevious result found --> replotting the results\n')
+            print('\nPrevious result found --> output/data/flops_N.npz\n')
             sizes = data['sizes']
             flops = data['flops']
         else:
@@ -77,7 +78,7 @@ def flopsCompute(sMin, sMax, N, base, force):
                       '| array size = ', str(sizes[itr]).ljust(12),
                       '| run time = ', "{:.4e}".format(runTime),
                       '| no.of iterations = ', str(nLoop).ljust(8))
-        np.savez('output/flops_N.npz', flops=flops, sizes=sizes)
+        np.savez('output/data/flops_N.npz', flops=flops, sizes=sizes)
 
     totalRunTime = time.perf_counter() - totalInitialTime
     print('\nFLOPS computation completed --> run time = ' +
