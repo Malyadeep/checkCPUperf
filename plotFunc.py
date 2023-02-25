@@ -3,8 +3,8 @@ import numpy as np
 
 
 def plotBandWidth(sizes, bandWidth):
-    print('\nPlotting bandwidth....')
-    print('Reading cacheDetails.md....')
+    print('\nPlotting bandwidth....', flush=True)
+    print('Reading cacheDetails.md....', flush=True)
     cpuFile = open('cacheDetails.md', 'r')
     lineList = cpuFile.readlines()
     cache = {}
@@ -35,14 +35,14 @@ def plotBandWidth(sizes, bandWidth):
         plt.loglog(cache[cacheKeyList[3]], cpu_y, label=cacheLabelKeyList[3] +
                    ':' + cacheLabel[cacheLabelKeyList[3]])
     plt.legend(loc='best')
-    plt.xlabel('size')
+    plt.xlabel('array size')
     plt.ylabel('Memory bandwidth (bytes/sec)')
     plt.savefig('output/figures/bandwidth_vs_N.png')
-    print('Finished plotting!\n')
+    print('Finished plotting!\n', flush=True)
 
 
 def plotFlops(sizes, flops):
-    print('\nPlotting FLOPS....')
+    print('\nPlotting FLOPS....', flush=True)
     label = ['2 flop', '4 flop', '8 flop', '16 flop', '24 flop', '32 flop',
              '64 flop']
 
@@ -50,10 +50,11 @@ def plotFlops(sizes, flops):
     for j in range(flops.shape[1]):
         plt.loglog(sizes, flops[:, j], marker='o', label=label[j])
     plt.legend(loc='best')
-    plt.xlabel('size')
+    plt.xlabel('array size')
     plt.ylabel('FLOPS')
+    plt.xlim([np.min(sizes)-5, 5*np.max(sizes)])
     plt.savefig('output/figures/flops_vs_N.png')
-    print('Finished plotting!\n')
+    print('Finished plotting!\n', flush=True)
 
 
 if __name__ == '__main__':

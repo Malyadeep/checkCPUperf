@@ -27,23 +27,25 @@ def main():
                         help='if selected plots the results')
     args = parser.parse_args()
     if not os.path.exists('output'):
-        print("\n'output/' not present : Creating 'output/'\n")
+        print("\n'output/' not present : Creating 'output/'\n", flush=True)
         os.makedirs('output')
         os.makedirs('output/data')
         os.makedirs('output/figures')
     else:
-        print("'output/' exists\n")
+        print("'output/' exists\n", flush=True)
         if not os.path.exists('output/data'):
             os.makedirs('output/data')
             if args.plot is True and not os.path.exists('output/figures'):
                 os.makedirs('output/figures')
-    print('################### Input parameters ###################')
-    print('--> sMin = '+str(args.sMin))
-    print('--> sMax = '+str(args.sMax))
-    print('--> no.of arrays = '+str(args.no_of_arrays))
-    print('--> base = '+str(args.base))
-    print('--> plot results = '+str(args.plot))
-    print('#########################################################')
+    print('################### Input parameters ###################',
+          flush=True)
+    print('--> sMin = '+str(args.sMin), flush=True)
+    print('--> sMax = '+str(args.sMax), flush=True)
+    print('--> no.of arrays = '+str(args.no_of_arrays), flush=True)
+    print('--> base = '+str(args.base), flush=True)
+    print('--> plot results = '+str(args.plot), flush=True)
+    print('#########################################################',
+          flush=True)
     bandWidthResult = bandWidth.bandWidthCompute(args.sMin, args.sMax,
                                                  args.no_of_arrays,
                                                  args.base, args.force)
@@ -54,10 +56,10 @@ def main():
         plotFunc.plotBandWidth(bandWidthResult[0], bandWidthResult[1])
         plotFunc.plotFlops(flopsResult[0], flopsResult[1])
     else:
-        print('Plot option not selected --> Results not plotted')
+        print('Plot option not selected --> Results not plotted', flush=True)
 
     print('Run completed --> run time = ' + "{:.4e}".format(time.perf_counter()
-          - startTime) + '\n')
+          - startTime) + '\n', flush=True)
 
 
 if __name__ == '__main__':
