@@ -2,8 +2,7 @@ import time
 from argparse import ArgumentParser
 import os
 
-import bandWidth
-import flops
+from src import bandWidth, flops
 import plotFunc
 
 
