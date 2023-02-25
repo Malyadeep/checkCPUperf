@@ -3,6 +3,9 @@ import numpy as np
 
 
 def plotBandWidth(sizes, bandWidth):
+    print('\n---------------------- Plotting bandwidth ---------------------- \
+          \n')
+    print('\nReading cacheDetails.md : \n')
     cpuFile = open('cacheDetails.md', 'r')
     lineList = cpuFile.readlines()
     cache = {}
@@ -36,9 +39,13 @@ def plotBandWidth(sizes, bandWidth):
     plt.xlabel('size')
     plt.ylabel('Memory bandwidth (bytes/sec)')
     plt.savefig('output/bandwidth_vs_N.png')
+    print('\n---------------------- Finished plotting ---------------------- \
+          \n')
 
 
 def plotFlops(sizes, flops):
+    print('\n---------------------- Plotting FLOPS ---------------------- \
+          \n')
     label = ['2 flop', '4 flop', '8 flop', '16 flop', '24 flop', '32 flop',
              '64 flop']
 
@@ -49,6 +56,8 @@ def plotFlops(sizes, flops):
     plt.xlabel('size')
     plt.ylabel('FLOPS')
     plt.savefig('output/flops_vs_N.png')
+    print('\n---------------------- Finished plotting ---------------------- \
+          \n')
 
 
 if __name__ == '__main__':
