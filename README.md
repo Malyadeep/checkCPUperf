@@ -31,13 +31,27 @@ The details of the results and the arguments that can be provided to the script 
 # Usage 
 The code generates arrays of various sizes and performs some computations and measures the time taken to do so. From the memory used and the floating point operations done, it calculates the peak memory bandwidth and FLOPS. The sizes of arrays are evenly spaced on a logspace and is decided by _numpy.logspace()_ function. The main script takes in arguments that specify the various arguments of the _numpy.logspace()_ function.
 The main script _performance.py_ which takes the following command line arguments to manipulate array sizes
-- _sMin_ -- denotes the minimum order of the array size
-- _sMax_ -- denotes the maximum order of the array size
-- _base_ -- specifies the base of the logarithm to use to generate the list of array sizes
-- _n_ -- number of arrays to create 
+- _sMin_ -- denotes the minimum order of the array size. Default is 1.
+- _sMax_ -- denotes the maximum order of the array size. Default is 8.
+- _base_ -- specifies the base of the logarithm to use to generate the list of array sizes. Default is 10.
+- _n_ -- number of arrays to create <br>
 The code also takes following optional arguments 
 - _f_ -- forces the code to run the test again and overwrite previous results if present. By default the program will not run again if previous results are present.
-- _p_ -- Specifies whether to plot the data or not. Default is false.
+- _p_ -- Specifies whether to plot the data or not. Default is false. <br>
+
+A sample run to generate arrays with specified sizes is given below
+> python performance.py --sMin 1 --sMax 9 -n 10 --base 11 
+
+Array sizes on which computations will be carried for given arguments:
+> [11         92        781       6583      55478     467524    3939916   33202393  279802621 2357947691]
+    
+It should be noted that each element of the array is a _numpy.float64_ having a size of _8 bytes_. <br>
+
+The code has 7 functions that do to 2, 4, 8, 16, 24, 32 and 64 floating point opeartions multiplied by the size of the array passed. <br>
+
+A function to plot the data is provided which can be modified to generate various linestyles and formatting. In a later release a provision could be provided that the function reads the parameters from a file.<br>
+The plots also compare the peak memory bandwidth with the cache sizes of the CPU cores. The cache information can be provided in the file _cacheDetails.md_. (To find the cache details and distribution of memory, obtain a specification sheet of the CPU). __Note__ : _Make sure the largest array size exceeds the maximum cache size of the CPU to get maximum understanding from the plots_. <br>
+
 
 
 
