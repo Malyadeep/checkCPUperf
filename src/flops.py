@@ -87,3 +87,7 @@ def flopsCompute(sMin, sMax, N, base, force):
     print('\n##############################################################' +
           '#########\n')
     return sizes, flops
+
+
+if __name__ == '__main__':
+    print('module containing functions to compute peak FLOPS')

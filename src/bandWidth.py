@@ -66,3 +66,7 @@ def bandWidthCompute(sMin, sMax, N, base, force):
     print('\n##############################################################' +
           '#########\n')
     return sizes, bandWidth
+
+
+if __name__ == '__main__':
+    print('module containing functions to compute peak bandwidth')
