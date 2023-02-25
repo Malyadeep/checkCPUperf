@@ -1,4 +1,4 @@
-# CPUperf
+# checkCPUperf
 A simple python library to estimate the single core memory bandwidth and peak FLOPS for a given CPU
 
 ## Installation and pre-requisites
@@ -17,9 +17,12 @@ After the pre-requisites are installed, the library can be obtained from the rep
 One can also directly download the tar ball or .zip file from the repository by clicking on __code__.
 
 After the file has been extracted go into the main folder (assuming it is _checkCPUperf/_) using
-> cd checkCPUperf/ <br>
+> cd checkCPUperf/ 
+
 and run the following command
-> python -m compileall -l . src/ <br>
+
+> python -m compileall -l . src/ 
+
 to generate the cache files. This will allow higher performance of the library from the first run itself.
 
 With this the library is all set to go. Just run the script _performance.py_ with argument _-p_ and check the results in the _output/_ directory.
