@@ -5,4 +5,4 @@
 L1              32      KB
 L2_per_core     512     KB
 L2_shared       6       MB
-L3              -1      MB
+L3              64      MB
