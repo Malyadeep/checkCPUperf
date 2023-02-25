@@ -61,9 +61,9 @@ The plots also compare the peak memory bandwidth with the cache sizes of the CPU
 - Also it is recommended that if using laptop, it is connected to AC power source.
 - The machine should be set to peak performance mode for best results. In Windows and macOS, set the _performance_ mode instead of _efficiency_. In LINUX, set the _governor_ to performance.
 - To ensure the code is run on a specified CPU core, the _taskset_ command can be used in LINUX. For example :
-> taskset -c [cpu_core] python performance.py [arguments] 
+    > taskset -c [cpu_core] python performance.py [arguments] 
 
-where [cpu_core] denotes the index of the CPU cores available. (Usually starts from 0)
+    where [cpu_core] denotes the index of the CPU cores available. (Usually starts from 0)
 
 # Sample Results
 Some sample results with explanations are provided in _SampleResults/_
