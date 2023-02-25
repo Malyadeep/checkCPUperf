@@ -10,7 +10,7 @@ To plot the results the program uses _matplotlib_ library which can be installed
 > pip install matplotlib
 
 After the pre-requisites are installed, the library can be obtained from the repository using:
-> curl -L -O https://github.com/Malyadeep/checkCPUperf/archive/main.zip  <br>
+> curl -L -O https://github.com/Malyadeep/checkCPUperf/archive/master.zip  <br>
 > unzip main.zip <br>
 > mv checkCPUperf-main checkCPUperf  <br>
 
