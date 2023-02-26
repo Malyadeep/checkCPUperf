@@ -10,9 +10,9 @@ To plot the results the program uses _matplotlib_ library which can be installed
 > pip install matplotlib
 
 After the pre-requisites are installed, the library can be obtained from the repository using:
-> curl -L -O https://github.com/Malyadeep/checkCPUperf/archive/master.zip  <br>
-> unzip main.zip <br>
-> mv checkCPUperf-main checkCPUperf  <br>
+> curl -L -O https://github.com/Malyadeep/checkCPUperf/archive/stable.zip  <br>
+> unzip stable.zip <br>
+> mv checkCPUperf-stable checkCPUperf  <br>
 
 One can also directly download the tar ball or .zip file from the repository by clicking on __code__.
 
@@ -31,7 +31,7 @@ The script can be run from terminal/shell as follows
 
 The details of the results and the arguments that can be provided to the script are given in the next section.
 
-# Usage 
+## Usage 
 The code generates arrays of various sizes and performs some computations and measures the time taken to do so. From the memory used and the floating point operations done, it calculates the peak memory bandwidth and FLOPS. The sizes of arrays are evenly spaced on a logspace and is decided by _numpy.logspace()_ function. The main script takes in arguments that specify the various arguments of the _numpy.logspace()_ function.
 The main script _performance.py_ which takes the following command line arguments to manipulate array sizes
 - _sMin_ -- denotes the minimum order of the array size. Default is 1.
@@ -56,7 +56,7 @@ The code has 7 functions that do to 2, 4, 8, 16, 24, 32 and 64 floating point op
 A function to plot the data is provided which can be modified to generate various linestyles and formatting. In a later release a provision could be provided that the function reads the parameters from a file.<br>
 The plots also compare the peak memory bandwidth with the cache sizes of the CPU cores. The cache information can be provided in the file _cacheDetails.md_. (To find the cache details and distribution of memory, obtain a specification sheet of the CPU). __Note__ : _Make sure the largest array size exceeds the maximum cache size of the CPU to get maximum understanding from the plots_. <br>
 
-# Best practices
+## Best practices
 - For best reults close all other applications that might be running before running the code.
 - Also it is recommended that if using laptop, it is connected to AC power source.
 - The machine should be set to peak performance mode for best results. In Windows and macOS, set the _performance_ mode instead of _efficiency_. In LINUX, set the _governor_ to performance.
@@ -65,7 +65,7 @@ The plots also compare the peak memory bandwidth with the cache sizes of the CPU
 
     where [cpu_core] denotes the index of the CPU cores available. (Usually starts from 0)
 
-# Sample Results
+## Sample Results
 Some sample results with explanations are provided in _SampleResults/_
 
 Happy computing!!
