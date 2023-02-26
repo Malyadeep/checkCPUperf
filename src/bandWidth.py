@@ -65,7 +65,7 @@ def bandWidthCompute(sMin, sMax, N, base, force):
     totalRunTime = time.perf_counter() - totalInitialTime
     print('\nBandwidth computation completed --> run time = ' +
           "{:.4e}".format(totalRunTime) + ' --> peak bandwidth = ' +
-          "{:.4f}".format(np.max(bandWidth)/10**9) + ' GB/s \n', flush=True)
+          "{:.4f}".format(np.max(bandWidth)/1024**3) + ' GB/s \n', flush=True)
     print('\n##############################################################' +
           '#########\n', flush=True)
     return sizes, bandWidth
