@@ -27,7 +27,7 @@ to generate the cache files. This will allow higher performance of the library f
 
 With this the library is all set to go. Just run the script _performance.py_ with argument _-p_ and check the results in the _output/_ directory.
 The script can be run from terminal/shell as follows
-> python performance.py -p
+> python3 performance.py -p
 
 The details of the results and the arguments that can be provided to the script are given in the next section.
 
@@ -44,7 +44,7 @@ The code also takes following optional arguments
 - _p_ -- Specifies whether to plot the data or not. Default is false. <br>
 
 A sample run to generate arrays with specified sizes is given below
-> python performance.py --sMin 1 --sMax 9 -n 10 --base 11 
+> python3 performance.py --sMin 1 --sMax 9 -n 10 --base 11 
 
 Array sizes on which computations will be carried for given arguments:
 > [11         92        781       6583      55478     467524    3939916   33202393  279802621 2357947691]
@@ -61,7 +61,7 @@ The plots also compare the peak memory bandwidth with the cache sizes of the CPU
 - Also it is recommended that if using laptop, it is connected to AC power source.
 - The machine should be set to peak performance mode for best results. In Windows and macOS, set the _performance_ mode instead of _efficiency_. In LINUX, set the _governor_ to performance.
 - To ensure the code is run on a specified CPU core, the _taskset_ command can be used in LINUX. For example :
-    > taskset -c [cpu_core] python performance.py [arguments] 
+    > taskset -c [cpu_core] python3 performance.py [arguments] 
 
     where [cpu_core] denotes the index of the CPU cores available. (Usually starts from 0)
 
