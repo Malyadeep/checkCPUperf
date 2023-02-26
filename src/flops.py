@@ -65,6 +65,7 @@ def flopsCompute(sMin, sMax, N, base, force):
                 func(y, x, a, b)
                 runTime1 = time.perf_counter() - initialTime
                 runTimeTemp.append(runTime1)
+                nLoopAll = []
                 delta = 0.2
                 for i in range(7):
                     y, x, a, b = make_data.make_data(sizes[itr])
@@ -74,13 +75,16 @@ def flopsCompute(sMin, sMax, N, base, force):
                         func(y, x, a, b)
                         nLoop += 1
                     runTimeTemp.append(delta/nLoop)
+                    nLoopAll.append(nLoop)
 
                 runTime = np.min(np.array(runTimeTemp))
+                nLoopMax = np.max(np.array(nLoop))
                 flops[itr, j] = totFlops/runTime
                 print(str(int(itr*100/sizes.shape[0])).ljust(2), '% done ',
                       '| array size = ', str(sizes[itr]).ljust(12),
                       '| run time = ', "{:.4e}".format(runTime),
-                      '| no.of iterations = ', str(nLoop).ljust(8), flush=True)
+                      '| no.of iterations = ', str(nLoopMax).ljust(8),
+                      flush=True)
         np.savez('output/data/flops_N.npz', flops=flops, sizes=sizes)
 
     totalRunTime = time.perf_counter() - totalInitialTime
