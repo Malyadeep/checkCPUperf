@@ -51,7 +51,7 @@ Array sizes on which computations will be carried for given arguments:
     
 It should be noted that each element of the array is a _numpy.float64_ having a size of _8 bytes_. <br>
 
-The code has 7 functions that do to 2, 4, 8, 16, 24, 32 and 64 floating point opeartions multiplied by the size of the array passed. <br>
+The code has 7 functions that do 2, 4, 8, 16, 24, 32 and 64 floating point opeartions multiplied by the size of the array passed. <br>
 
 A function to plot the data is provided which can be modified to generate various linestyles and formatting. In a later release a provision could be provided that the function reads the parameters from a file.<br>
 The plots also compare the peak memory bandwidth with the cache sizes of the CPU cores. The cache information can be provided in the file _cacheDetails.md_. (To find the cache details and distribution of memory, obtain a specification sheet of the CPU). __Note__ : _Make sure the largest array size exceeds the maximum cache size of the CPU to get maximum understanding from the plots_. <br>
