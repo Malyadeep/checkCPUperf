@@ -1,6 +1,7 @@
 import time
 from argparse import ArgumentParser
 import os
+import numpy as np
 
 from src import bandWidth, flops
 import plotFunc
@@ -46,14 +47,32 @@ def main():
     print('--> plot results = '+str(args.plot), flush=True)
     print('#########################################################',
           flush=True)
+    print('Reading cacheDetails.md....', flush=True)
+    cpuFile = open('cacheDetails.md', 'r')
+    lineList = cpuFile.readlines()
+    cache = {}
+    cacheLabel = {}
+    for itr in range(4, len(lineList)):
+        temp = lineList[itr].split()
+        if temp[2].lower() == 'kb':
+            cache[temp[0]] = np.full((10,), fill_value=float(temp[1])*1024/8)
+            cacheLabel[temp[0]] = temp[1]+' kB'
+        elif temp[2].lower() == 'mb':
+            cache[temp[0]] = np.full((10,), fill_value=float(temp[1]) * 1024 *
+                                     1024/8)
+            cacheLabel[temp[0]] = temp[1]+' MB'
+    print('#########################################################',
+          flush=True)
+
     bandWidthResult = bandWidth.bandWidthCompute(args.sMin, args.sMax,
                                                  args.no_of_arrays,
                                                  args.base, args.force)
     flopsResult = flops.flopsCompute(args.sMin, args.sMax, args.no_of_arrays,
-                                     args.base, args.force)
+                                     args.base, args.force, cache, cacheLabel)
 
     if args.plot is True:
-        plotFunc.plotBandWidth(bandWidthResult[0], bandWidthResult[1])
+        plotFunc.plotBandWidth(bandWidthResult[0], bandWidthResult[1],
+                               cache, cacheLabel)
         plotFunc.plotFlops(flopsResult[0], flopsResult[1])
     else:
         print('Plot option not selected --> Results not plotted', flush=True)

@@ -33,7 +33,8 @@ def bandWidthCompute(sMin, sMax, N, base, force):
                   ' peak bandwidth\n', flush=True)
         sizes = np.logspace(sMin, sMax, N, base=base, dtype=int)
         bandWidth = np.zeros_like(sizes)
-        y, x, a, b = make_data.make_data(10)
+        y_test, x_test, a_test, b_test = make_data.make_data(10)
+        axpb(y_test, x_test, a_test, b_test)
         print('\n-------------------- bandWidth vs N --------------------\
               \n', flush=True)
         for itr in range(sizes.shape[0]):

@@ -4,8 +4,9 @@ import numpy as np
 from src import make_data, flopFunc
 
 
-def flopsCompute(sMin, sMax, N, base, force):
+def flopsCompute(sMin, sMax, N, base, force, cache, cacheLabel):
     totalInitialTime = time.perf_counter()
+    cacheKeyList = list(cache.keys())
     print('Running FLOPS computation....', flush=True)
     try:
         data = np.load('output/data/flops_N.npz')
@@ -87,10 +88,15 @@ def flopsCompute(sMin, sMax, N, base, force):
                       flush=True)
         np.savez('output/data/flops_N.npz', flops=flops, sizes=sizes)
 
+    for itr in range(sizes.shape[0]):
+        if cache[cacheKeyList[-1]][0] < sizes[itr]:
+            flopPrintItr = itr + 1
+            break
     totalRunTime = time.perf_counter() - totalInitialTime
     print('\nFLOPS computation completed --> run time = ' +
           "{:.4e}".format(totalRunTime) + ' --> peak GFLOPS = ' +
-          "{:.4f}".format(np.max(flops)/10**9) + '\n', flush=True)
+          "{:.4f}".format(np.max(flops[:flopPrintItr, :])/10**9) + '\n',
+          flush=True)
     print('\n##############################################################' +
           '#########\n', flush=True)
     return sizes, flops
